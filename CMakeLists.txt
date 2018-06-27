@@ -5,7 +5,9 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 find_package(FreeImage REQUIRED)
 
-add_library(shaders STATIC "${CMAKE_SOURCE_DIR}/src/shaders/shaders.h")
+add_library(shaders STATIC 
+	"${CMAKE_SOURCE_DIR}/src/shaders/shaders.h"
+	"${CMAKE_SOURCE_DIR}/src/shaders/shaders.cpp")
 set_target_properties(shaders PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(shaders PUBLIC "${CMAKE_SOURCE_DIR}/src/shaders")
 
