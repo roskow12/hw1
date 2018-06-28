@@ -7,7 +7,7 @@
 #include <vector>
 
 // May need to replace with absolute path on some systems
-#define PATH_TO_TEAPOT_OBJ "teapot.obj"
+#define PATH_TO_TEAPOT_OBJ "../teapot.obj"
 
 const int numobjects = 2 ; // ** NEW ** number of objects for buffer 
 const int numperobj  = 3 ;

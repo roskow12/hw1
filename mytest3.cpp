@@ -409,8 +409,8 @@ void init (void)
 
 	// Initialize the shaders
 
-	vertexshader = initshaders(GL_VERTEX_SHADER, "shaders/light.vert.glsl") ;
-	fragmentshader = initshaders(GL_FRAGMENT_SHADER, "shaders/light.frag.glsl") ;
+	vertexshader = initshaders(GL_VERTEX_SHADER, "../shaders/light.vert.glsl") ;
+	fragmentshader = initshaders(GL_FRAGMENT_SHADER, "../shaders/light.frag.glsl") ;
 	GLuint program = glCreateProgram() ;
 	shaderprogram = initprogram(vertexshader, fragmentshader) ;
 	GLint linked;
@@ -439,7 +439,7 @@ void init (void)
 	glGenBuffers(3, teapotbuffers);
 
 	// Initialize texture
-	inittexture("wood.ppm", shaderprogram) ; 
+	inittexture("../wood.ppm", shaderprogram) ; 
 
 	// Initialize objects
 	initobject(FLOOR, (GLfloat *)floorverts, sizeof(floorverts), (GLfloat *)floorcol, sizeof(floorcol), (GLubyte *)floorinds, sizeof(floorinds), GL_TRIANGLES);
