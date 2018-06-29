@@ -26,7 +26,7 @@ mat3 Transform::rotate(const float degrees, const vec3& axis) {
 void Transform::left(float degrees, vec3& eye, vec3& up) {
 
 	vec3 yaxis(0,1,0);
-	mat3 rotated = rotate(degrees, yaxis);
+	mat3 rotated = rotate(degrees, up);
 	eye = rotated*eye;
 
 	vec3 x_unit(1,0,0);
@@ -46,17 +46,26 @@ void Transform::left(float degrees, vec3& eye, vec3& up) {
 
 // Transforms the camera up around the "crystal ball" interface
 void Transform::up(float degrees, vec3& eye, vec3& up) {
-	vec3 xaxis(1,0,0);
-	mat3 rotated = rotate(degrees, xaxis);
+	vec3 y_axis(0,1,0);
+	const float radians = degrees*PI_OVER_180; 	
+	
+	vec3 rotate_around(glm::cross(up, eye));
+	rotate_around = glm::normalize(rotate_around);
+	printf("rotate_around:%.2f, %.2f, %.2f", rotate_around.x, rotate_around.y, rotate_around.z);
+	mat3 rotated = rotate(degrees, rotate_around);
+
 	eye = rotated*eye;
 	
+	up = glm::cross(eye, rotate_around);
+	up = glm::normalize(up);
+
 	vec3 x_unit(1,0,0);
 	vec3 cross = glm::cross(eye, x_unit);
-	if(cross.y>0)
-		up.y = 1;
-	else
-		up.y = -1;
-	printf("up:%.2f, %.2f, %.2f", up.x, up.y, up.z);
+	// if(cross.y>0)
+	// 	up.y = 1;
+	// else
+	// 	up.y = -1;
+	// printf("up:%.2f, %.2f, %.2f", up.x, up.y, up.z);
 	
 	printf(" eye cross: %.2f, %.2f, %.2f", cross.x, cross.y, cross.z);
 	printf(" eye: %.2f, %.2f, %.2f; distance: %.2f\n", eye.x, eye.y, eye.z, sqrt(pow(eye.x, 2) + pow(eye.y, 2) + pow(eye.z, 2)));
